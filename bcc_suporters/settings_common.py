@@ -23,6 +23,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'donate.apps.DonateConfig',
+
+    'django_ses',
 ]
 
 MIDDLEWARE = [
