@@ -2,9 +2,9 @@ from django import forms
 from django.core.mail import EmailMessage
 
 class InquiryForm(forms.Form):
-    name = forms.CharField(label='お名前', max_length=30)
+    name = forms.CharField(label='お名前', max_length=30,  required=False)
     email = forms.EmailField(label='メールアドレス')
-    price = forms.IntegerField(label='寄付額', min_value=1000)
+    price = forms.IntegerField(label='寄付額', min_value=1)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
