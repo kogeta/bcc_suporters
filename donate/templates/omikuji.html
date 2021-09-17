@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>おみくじ</title>
+<link href="https://fonts.googleapis.com/css2?family=Hina+Mincho&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+    
+<body>
+    
+<section>
+  <p>おみくじ開始！！</p>
+  <div id="omikuji">
+    <img src="{% static 'src/omikuji.png' %}" class="omikuji" >
+  </div>
+  <div id="container">
+    <a href="#" class="btn-emboss " id="btn-emboss">おみくじ開始</a>
+    <a href="https://tkoga9278.wixsite.com/website" class="btn-emboss" id="btn-wix">終了する</a>
+  </div>
+  <span id="txt-wix">※終了ボタンを押すと，BCC suportersのサイトに戻ります</span>
+</section>
+
+<script type="text/javascript">
+  const btn = document.getElementById("btn-emboss");
+  const btn2 = document.getElementById("btn-wix");
+  const txt = document.getElementById("txt-wix");
+  const box = document.getElementById("omikuji");
+  const kuji = () => { 
+    let n = Math.floor(Math.random() * 7);
+    if(n===0){ document.getElementsByClassName("omikuji")[0].setAttribute('src', "{% static 'src/kuji0.png' %}") }
+    if(n===1){ document.getElementsByClassName("omikuji")[0].setAttribute('src', "{% static 'src/kuji1.png' %}") }
+    if(n===2){ document.getElementsByClassName("omikuji")[0].setAttribute('src', "{% static 'src/kuji2.png' %}") }
+    if(n===3){ document.getElementsByClassName("omikuji")[0].setAttribute('src', "{% static 'src/kuji3.png' %}") }
+    if(n===4){ document.getElementsByClassName("omikuji")[0].setAttribute('src', "{% static 'src/kuji4.png' %}") }
+    if(n===5){ document.getElementsByClassName("omikuji")[0].setAttribute('src', "{% static 'src/kuji5.png' %}") }
+    if(n===6){ document.getElementsByClassName("omikuji")[0].setAttribute('src', "{% static 'src/kuji6.png' %}") }
+    console.log(n)
+    
+    document.getElementById("btn-emboss").innerHTML = "もう一回";
+    box.classList.remove("omi"); 
+    btn2.removeAttribute("id");
+    txt.removeAttribute("id");
+  };
+  const randomNumber = ["1", "2", "3", "4", "5", "6", "7"];
+  let timeoutId;
+  btn.addEventListener("click", () => {
+    if(box.className === "") {
+      document.getElementsByClassName("omikuji")[0].setAttribute('src', "{% static 'src/omikuji.png' %}")
+      box.classList.add("omi");
+      document.getElementById("btn-emboss").innerHTML = "ストップ";
+      timeoutId = setTimeout(kuji, 2000);
+    } else {
+      clearTimeout(timeoutId);
+      box.classList.remove("omi");
+      document.getElementById("btn-emboss").innerHTML = "再開";
+    }
+  });
+</script>
+</body>
+ 
+ 
+</html>
